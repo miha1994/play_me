@@ -5,7 +5,7 @@
 Core core;
 
 void Core::init () {
-	m_current_state = State_0;
+	m_current_state = State_PLATFORM_REDACTOR;
 	m_spaces["platform"] = new Space ("platform");	// здесь парсится файл platform_space.txt и создается основной спэйс
 	m_current_spaces.push_back (m_spaces["platform"]);	// он назначается активным
 
@@ -14,6 +14,24 @@ void Core::init () {
 
 void Core::update (float dt) {
 	in.upd ();
+	if (m_current_state == State_PLATFORM_REDACTOR && !in.kb.ctrl.pressed_now) {
+		if (in.kb ['B'].just_pressed) {
+			m_active_type = Solid;
+		} else if (in.kb ['C'].just_pressed) {
+			m_active_type = Cat;
+		} else if (in.kb ['Q'].just_pressed) {
+			m_current_state = State_PLATFORM_GAME;
+			goto lab;
+		}
+	}
+	if (m_current_state == State_PLATFORM_GAME) {
+		if (!in.kb.ctrl.pressed_now) {
+			if (in.kb ['Q'].just_pressed) {
+				m_current_state = State_PLATFORM_REDACTOR;
+			}
+		}
+	}
+lab:
 	forstl_p (q, m_current_spaces) {
 		forstl_p (p, q->m_objects_to_update) {
 			p->update (m_current_state, dt);

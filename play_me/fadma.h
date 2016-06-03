@@ -33,6 +33,7 @@ inline double deg_ (double radian);		// перевод угла из радиан в градусы
 // минимум и максимум
 #define Max(a,b)				(((a)<(b))?(b):(a))
 #define Min(a,b)				(((a)>(b))?(b):(a))
+#define Abs(x)					(((x)>0) ? (x) : (-(x)))
 
 #define error(text)	do {cout << "\n\nERROR : " + string (text) + "\n"; } while (0)
 

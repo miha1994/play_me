@@ -13,6 +13,7 @@ extern GLuint gSampler;	// deep and dark opengl
 #define Texture_name(name)	(prefix_folder + "res/tex/" + string (name) + ".png")	// преобразователь имени текстуры в полное название файла текстуры
 
 #define CLR		sf::Color
+#define D_CONTAINES(stl, obj)		((stl).find (obj) != (stl).end ())
 
 #define rand1	(rand () / float (RAND_MAX))
 

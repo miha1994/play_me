@@ -129,10 +129,14 @@ public:
 	array_2d () {
 		m_initiated = false;
 	}
-	~array_2d () {
+	void destroy () {
 		if (m_initiated) {
 			delete []m_a;
+			m_initiated = false;
 		}
+	}
+	~array_2d () {
+		destroy ();
 	}
 	// преобразование к указателю
 	operator T* () {

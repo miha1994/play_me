@@ -26,7 +26,10 @@ struct input {
 		friend struct input;
 		v2i pos;
 		button_state mbutton[3];
-		_mouse_info () {
+		button_state &left;
+		button_state &right;
+		button_state &middle;
+		_mouse_info () : left (mbutton[MOUSE_LEFT]), right (mbutton[MOUSE_RIGHT]), middle (mbutton[MOUSE_MIDDLE]) {
 			FOR (i, 3) {
 				mbutton[i].pressed_now = false;
 				mbutton[i].just_pressed = false;
@@ -43,12 +46,16 @@ struct input {
 		button_state space;
 		button_state delete_;
 		button_state dirs[4];
+		button_state &left;
+		button_state &right;
+		button_state &up;
+		button_state &down;
 	private:
 		button_state _abc[26];
 		button_state _digits[10];
 	public:
 		button_state &operator [] (char letter) { return isdigit (letter) ? _digits [letter - '0'] : (_abc [letter - (isupper (letter) ? 'A' : 'a')]);}
-		_kb_info () {
+		_kb_info () : left (dirs[D_LEFT]), right (dirs[D_RIGHT]), up (dirs[D_UP]), down (dirs[D_DOWN]) {
 			FOR (i, 26) {
 				_abc[i].just_pressed = false;
 				_abc[i].just_released = false;
