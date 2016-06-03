@@ -1,0 +1,39 @@
+﻿Build started 03.06.2016 15:28:41.
+     1>Project "C:\Users\User\Documents\Visual Studio 2012\Projects\play_me\play_me\play_me.vcxproj" on node 2 (Build target(s)).
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /I"D:\SFML-2.3.1\include" /ID:\freeglut\include /I"D:\glew-1.13.0\include" /ZI /nologo /W3 /WX- /Od /Oy- /D SFML_STATIC /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt frame_buffer.cpp
+         frame_buffer.cpp
+     1>c:\users\user\documents\visual studio 2012\projects\play_me\play_me\fadma.h(25): warning C4005: 'FOR' : macro redefinition
+                 c:\users\user\documents\visual studio 2012\projects\play_me\play_me\math_3d.h(194) : see previous definition of 'FOR'
+     1>c:\users\user\documents\visual studio 2012\projects\play_me\play_me\frame_buffer.cpp(10): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
+     1>c:\users\user\documents\visual studio 2012\projects\play_me\play_me\frame_buffer.cpp(22): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 11.0\vc\include\stdio.h(218) : see declaration of 'fopen'
+     1>c:\users\user\documents\visual studio 2012\projects\play_me\play_me\frame_buffer.cpp(24): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 11.0\vc\include\stdio.h(237) : see declaration of 'fscanf'
+     1>c:\users\user\documents\visual studio 2012\projects\play_me\play_me\frame_buffer.cpp(53): warning C4244: '+=' : conversion from 'double' to 'float', possible loss of data
+       Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\User\Documents\Visual Studio 2012\Projects\play_me\Debug\play_me.exe" /INCREMENTAL /NOLOGO /LIBPATH:"D:\SFML-2.3.1\lib" /LIBPATH:D:\freeglut\lib /LIBPATH:"D:\glew-1.13.0\lib" "sfml-graphics-s-d.lib" "sfml-window-s-d.lib" "sfml-system-s-d.lib" "sfml-audio-s-d.lib" "sfml-main.lib" freeglut.lib glew32.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\User\Documents\Visual Studio 2012\Projects\play_me\Debug\play_me.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\User\Documents\Visual Studio 2012\Projects\play_me\Debug\play_me.lib" /MACHINE:X86 Debug\cat.obj
+         Debug\core.obj
+         Debug\direction.obj
+         Debug\fadma.obj
+         Debug\frame_buffer.obj
+         Debug\glob.obj
+         Debug\hot_vars.obj
+         Debug\input.obj
+         Debug\lodepng.obj
+         Debug\main.obj
+         Debug\math.obj
+         Debug\object.obj
+         Debug\pure_opengl.obj
+         Debug\read_write.obj
+         Debug\Renderer.obj
+         Debug\rgba_array.obj
+         Debug\solid.obj
+         Debug\space.obj
+         Debug\static_im.obj
+         play_me.vcxproj -> C:\Users\User\Documents\Visual Studio 2012\Projects\play_me\Debug\play_me.exe
+     1>Done Building Project "C:\Users\User\Documents\Visual Studio 2012\Projects\play_me\play_me\play_me.vcxproj" (Build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:05.38
