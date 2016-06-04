@@ -3,9 +3,10 @@
 #include "input.h"
 #include "core.h"
 #include "solid.h"
+#include "camera.h"
 
 #define D_VELOCITY_X_MAX	230
-#define D_VELOCITY_Y_MAX	230
+#define D_VELOCITY_Y_MAX	400
 #define D_VEL_X		if (m_velocity.x < -D_VELOCITY_X_MAX) { \
 					m_velocity.x = -D_VELOCITY_X_MAX; \
 				} else if (m_velocity.x > D_VELOCITY_X_MAX) { \
@@ -18,10 +19,13 @@
 				}
 
 void cat::render (State state) {
+	camera *cam = D_PLATFORM (camera);
+	m_frames.m_pos -= cam->m_pos;
 	m_frames.render_frame (!m_to_right);
 }
 
 void cat::update (State state, float dt) {
+	camera *cam = D_PLATFORM (camera);
 	if (state == State_PLATFORM_GAME) {
 		switch (m_state) {
 		case Cat_on_floor:
@@ -50,7 +54,7 @@ void cat::update (State state, float dt) {
 				}
 			}
 			if (in.kb.space.just_pressed) {
-				m_velocity.y = -D_VELOCITY_Y_MAX + 50;
+				m_velocity.y = -180;
 				m_time_velocity = 0.2;
 				m_state = Cat_in_jump;
 			}
@@ -62,7 +66,7 @@ void cat::update (State state, float dt) {
 			m_velocity += v2f (0, 800 * dt);
 			if ((m_time_velocity -= dt) > 0) {
 				if (in.kb.space.pressed_now) {
-					m_velocity.y = -D_VELOCITY_Y_MAX + 50;
+					m_velocity.y = -180;
 				} else {
 					m_time_velocity = -1;
 				}
@@ -91,7 +95,7 @@ void cat::update (State state, float dt) {
 				v2i strt (m_velocity.x > 0 ? 20 : 2, 3);
 				FOR_2D (vi, 2, 11) {
 					v2i v (m_frames.m_pos + strt + vi);
-					if (sld->m_map << v && sld->m_map[v]) {
+					if (sld->m_map << v && sld->m_map[v] == 1) {
 						if (m_velocity.x > 0) {
 							m_pos.x = (m_frames.m_pos.x -= 1);
 						} else {
@@ -106,7 +110,7 @@ void cat::update (State state, float dt) {
 				bool jump = true;
 				FOR_2D (vi, 15, 2) {
 					v2i v (m_frames.m_pos + strt + vi);
-					if (sld->m_map << v && sld->m_map[v]) {
+					if (sld->m_map << v && sld->m_map[v] == 1) {
 						m_frames.m_pos.y--;
 						//m_pos.y -= 1;
 						if (m_state != Cat_on_floor) {
@@ -122,7 +126,7 @@ void cat::update (State state, float dt) {
 							contin = false;
 							FOR_2D (vi, 15, 2) {
 								v2i v (m_frames.m_pos + strt + vi);
-								if (sld->m_map << v && sld->m_map[v]) {
+								if (sld->m_map << v && sld->m_map[v] == 1) {
 									contin = true;
 									m_frames.m_pos.y--;
 									m_pos.y -= 1;
@@ -141,7 +145,7 @@ void cat::update (State state, float dt) {
 				v2i strt (5, 0);
 				FOR_2D (vi, 15, 2) {
 					v2i v (m_frames.m_pos + strt + vi);
-					if (sld->m_map << v && sld->m_map[v]) {
+					if (sld->m_map << v && sld->m_map[v] == 1) {
 						m_velocity.y = 0;
 						m_time_velocity = -1;
 						break;
@@ -149,9 +153,13 @@ void cat::update (State state, float dt) {
 				}
 			}
 		}
-	} else if (state == State_PLATFORM_REDACTOR && core.m_active_type == Cat) {
-		m_pos = in.mouse.pos;
-		m_frames.m_pos = m_pos;
+	} else if (state == State_PLATFORM_REDACTOR) {
+		if (core.m_active_type == Cat) {
+			m_pos = in.mouse.pos + cam->m_pos;
+			m_frames.m_pos = m_pos;
+		} else {
+			m_frames.m_pos = m_pos;
+		}
 	}
 }
 

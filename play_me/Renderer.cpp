@@ -8,6 +8,11 @@ GLfloat colors[D_W*D_H];
 GLuint colors_location;
 
 void Renderer::draw_everything () {
+	static CLR black_ar[D_W * D_H];
+	for each (auto var in black_ar) {
+		var = CLR::Black;
+	}
+	memcpy (m_tex_array, black_ar, sizeof (black_ar));
 	forstl (p, m_render_list) {
 		m_tex_array.draw (p->rgba_ar, p->pos, p->scale);
 	}

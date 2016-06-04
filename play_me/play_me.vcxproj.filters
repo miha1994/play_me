@@ -72,6 +72,9 @@
     <ClCompile Include="frame_buffer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="camera.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="array_2d.h">
@@ -134,12 +137,18 @@
     <ClInclude Include="frame_buffer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="camera.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="D:\res\inf\platform_space.txt">
       <Filter>Resource Files</Filter>
     </Text>
     <Text Include="D:\res\inf\hot_vars.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="D:\res\inf\copy.txt">
       <Filter>Resource Files</Filter>
     </Text>
   </ItemGroup>

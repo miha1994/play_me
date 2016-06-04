@@ -123,6 +123,7 @@ struct v2i		// двухмерные вектора
 	v2i& operator /= (const float r);
 	v2i operator + (const v2i& r);
 	v2i operator - (const v2i& r);
+	v2i operator - ();
 	v2i operator * (const float r);
 	v2i operator / (const float r);
 	bool operator == (const v2i& r) {return x == r.x && y == r.y;}
@@ -151,6 +152,7 @@ struct v2f		// двухмерные вектора
 	v2f& operator /= (const float r);
 	v2f operator + (const v2f& r);
 	v2f operator - (const v2f& r);
+	v2f operator - ();
 	v2f operator * (const float r);
 	v2f operator / (const float r);
 	bool operator == (const v2f& r) {return x == r.x && y == r.y;}
@@ -160,6 +162,9 @@ struct v2f		// двухмерные вектора
 		y = v.y;
 	}
 };
+
+float length (v2i v);
+float length (v2f v);
 
 #define me (*this)
 #define FOR(z, N)   for (int z = 0; z < N; ++z)

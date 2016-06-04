@@ -14,11 +14,16 @@ void Core::init () {
 
 void Core::update (float dt) {
 	in.upd ();
+	rand ();
 	if (m_current_state == State_PLATFORM_REDACTOR && !in.kb.ctrl.pressed_now) {
 		if (in.kb ['B'].just_pressed) {
 			m_active_type = Solid;
-		} else if (in.kb ['C'].just_pressed) {
+		} else if (in.kb ['H'].just_pressed) {
 			m_active_type = Cat;
+		} else if (in.kb ['C'].just_pressed) {
+			m_active_type = Camera;
+		} else if (in.kb ['S'].just_pressed) {
+			m_active_type = Static_im;
 		} else if (in.kb ['Q'].just_pressed) {
 			m_current_state = State_PLATFORM_GAME;
 			goto lab;

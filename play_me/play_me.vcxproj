@@ -82,6 +82,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="camera.cpp" />
     <ClCompile Include="cat.cpp" />
     <ClCompile Include="core.cpp" />
     <ClCompile Include="direction.cpp" />
@@ -104,6 +105,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="array_2d.h" />
+    <ClInclude Include="camera.h" />
     <ClInclude Include="cat.h" />
     <ClInclude Include="core.h" />
     <ClInclude Include="direction.h" />
@@ -125,6 +127,7 @@
     <ClInclude Include="type.h" />
   </ItemGroup>
   <ItemGroup>
+    <Text Include="D:\res\inf\copy.txt" />
     <Text Include="D:\res\inf\hot_vars.txt" />
     <Text Include="D:\res\inf\platform_space.txt" />
   </ItemGroup>

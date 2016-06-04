@@ -31,3 +31,4 @@ public:
 extern Core core;
 
 #define D_OBJ(str) core.m_spaces[(str)]->m_objects
+#define D_PLATFORM(type) (type *) D_OBJ("platform")[#type]

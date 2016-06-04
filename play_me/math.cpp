@@ -43,6 +43,10 @@ v2i v2i::operator - (const v2i& r) {
 	return v2i (x - r.x, y - r.y);
 }
 
+v2i v2i::operator - () {
+	return v2i (-x, -y);
+}
+
 v2i v2i::operator * (const float r) {
 	return v2i (x * r, y * r);
 }
@@ -99,12 +103,25 @@ v2f v2f::operator - (const v2f& r) {
 	return v2f (x - r.x, y - r.y);
 }
 
+v2f v2f::operator - () {
+	return v2f (-x, -y);
+}
+
 v2f v2f::operator * (const float r) {
 	return v2f (x * r, y * r);
 }
 
 v2f v2f::operator / (const float r) {
 	return v2f (x / r, y / r);
+}
+
+#include <cmath>
+
+float length (v2i v) {
+	return sqrt (v.x * v.x + v.y * v.y);
+}
+float length (v2f v) {
+	return sqrt (v.x * v.x + v.y * v.y);
 }
 
 // Matrix4f

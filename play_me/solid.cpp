@@ -3,25 +3,28 @@
 #include "Renderer.h"
 #include "core.h"
 #include "input.h"
+#include "camera.h"
 
 void solid::render (State state) {
+	camera *cam = D_PLATFORM (camera);
 	if (state == State_PLATFORM_REDACTOR) {
 		if (m_tmp.m_initiated) {
-			D_ADD_SPRITE (m_tmp, m_tmp_pos);
+			D_ADD_SPRITE (m_tmp, m_tmp_pos - cam->m_pos);
 		}
 	}
-	D_ADD_SPRITE (m_map_visualisation, v2i (0,0));
+	D_ADD_SPRITE (m_map_visualisation, -cam->m_pos);
 }
 
 void solid::update (State state, float dt) {
+	camera *cam = D_PLATFORM (camera);
 	if (state == State_PLATFORM_GAME) {
 		
 	} else if (state == State_PLATFORM_REDACTOR && core.m_active_type == Solid) {
 		if (in.mouse.left.just_pressed || in.mouse.right.just_pressed) {
-			m_start_mouse_pos = in.mouse.pos;
+			m_start_mouse_pos = in.mouse.pos + cam->m_pos;
 		}
 		if (in.mouse.left.pressed_now || in.mouse.right.pressed_now) {
-			v2i dif = in.mouse.pos - m_start_mouse_pos;
+			v2i dif = in.mouse.pos + cam->m_pos - m_start_mouse_pos;
 			v2i abs (Abs (dif.x), Abs (dif.y));
 			if (abs.x > abs.y) {
 				dif.y = 1;
@@ -52,7 +55,7 @@ void solid::update (State state, float dt) {
 		if (in.mouse.left.just_released || in.mouse.right.just_released) {
 			FOR_ARRAY_2D (v, m_tmp) {
 				if (m_map << m_tmp_pos + v) {
-					m_map[m_tmp_pos + v] = in.mouse.left.just_released;
+					m_map[m_tmp_pos + v] = in.mouse.left.just_released ? 1 : 0;
 				}
 			}
 			FOR_ARRAY_2D (v, m_map) {

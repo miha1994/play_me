@@ -4,7 +4,7 @@
 #include "array_2d.h"
 
 struct solid : Object {
-	array_2d <bool> m_map;
+	array_2d <int> m_map;
 	v2i m_start_mouse_pos;
 	rgba_array m_tmp;
 	rgba_array m_map_visualisation;

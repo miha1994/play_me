@@ -48,8 +48,14 @@ void RenderSceneCB()
 		a_first_time = false;
 		a_timer.restart ();
 	}
-	core.update (a_timer.getElapsedTime ().asSeconds ());
+	float dt = a_timer.getElapsedTime ().asSeconds ();
 	a_timer.restart ();
+	//static FILE *out = fopen ((prefix_path + "inf/out.txt").c_str (), "w");
+	//fprintf (out, "%4d %10g\n", int(1/dt), dt);
+	if (in.kb.escape.pressed_now) {
+		exit (0);
+	}
+	core.update (dt);
 	core.render ();
 
 	core.m_renderer.draw_everything ();
@@ -133,9 +139,9 @@ void glut_initialization () {
 	glutInitWindowPosition(D_X_INIT, D_Y_INIT);
     glutCreateWindow("Tutorial 06");
 	if (g_fullscreen) {
-	//glutGameModeString("640x480:32@60");
+	//glutGameModeString("640x480:32@1000");
 		glutGameModeString ("1280x960:32@60");
-	//glutGameModeString("1920x1080:32@60");
+	//glutGameModeString("1920x1080:32@1000");
 		glutEnterGameMode ();
 	}
 
