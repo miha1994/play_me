@@ -4,14 +4,15 @@
 #include <vector>
 #include "Renderer.h"
 
+// анимация: кадры, 
 struct frames {
-	v2i m_pos;
-	float m_time_to_switch_frame;
-	int m_fps;
-	int m_current_frame;
-	vector <rgba_array> m_frames;
-	vector <rgba_array> m_flip_frames;
-	struct command {
+	v2i m_pos; // позиция кота в кадре
+	float m_time_to_switch_frame;  //время, количество секунд кот осталось до смены следующего кадра
+	int m_fps;  // фпс
+	int m_current_frame; // текущий кадр
+	vector <rgba_array> m_frames;  //все кадры (право)
+	vector <rgba_array> m_flip_frames;  //инвертированные кадры (лево)
+	struct command {  // команда(инструкция) - шаблон анимации(есть команды: моргунуть, вильнуть хвостом)
 		int start;
 		int stop_point;
 		int next_point_after_stop;
@@ -28,7 +29,7 @@ struct frames {
 	vector <command> m_instructions;
 	int m_current_instruction;
 
-	void go_to_instruction (int num_of_command);
+	void go_to_instruction (int num_of_command);  // переход по инструкции/по команде
 	void init (string file);
 	void update (float dt);
 	void render_frame (bool flip);

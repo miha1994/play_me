@@ -50,6 +50,7 @@ void RenderSceneCB()
 	}
 	float dt = a_timer.getElapsedTime ().asSeconds ();
 	a_timer.restart ();
+	// ֲûגמה ג פאיכ פןס ט הוכüעא ׂ
 	//static FILE *out = fopen ((prefix_path + "inf/out.txt").c_str (), "w");
 	//fprintf (out, "%4d %10g\n", int(1/dt), dt);
 	if (in.kb.escape.pressed_now) {

@@ -3,6 +3,7 @@
 #include "state.h"
 #include "array_2d.h"
 
+// белые линии
 struct solid : Object {
 	array_2d <int> m_map;
 	v2i m_start_mouse_pos;

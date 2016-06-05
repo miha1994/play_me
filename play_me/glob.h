@@ -15,7 +15,7 @@ extern GLuint gSampler;	// deep and dark opengl
 #define CLR		sf::Color
 #define D_CONTAINES(stl, obj)		((stl).find (obj) != (stl).end ())
 
-#define rand1	(rand () / float (RAND_MAX))
+#define rand1	(rand () / float (RAND_MAX))  // случаное число от 0 до 1
 
 CLR operator * (CLR c, float f);		// умножение цвета на скаляр
 CLR operator ^ (CLR c, CLR s);			// сложение цветов. нельзя использовать +, так как он уже перегружен в sfml, получится неоднозначность

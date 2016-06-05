@@ -1,8 +1,142 @@
-﻿Build started 04.06.2016 18:04:45.
+﻿Build started 05.06.2016 16:34:42.
      1>Project "C:\Users\User\Documents\Visual Studio 2012\Projects\play_me\play_me\play_me.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /I"D:\SFML-2.3.1\include" /ID:\freeglut\include /I"D:\glew-1.13.0\include" /Zi /nologo /W3 /WX- /O2 /Oi /Oy- /GL /D SFML_STATIC /D WIN32 /D NDEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Release\\" /Fd"Release\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt camera.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /I"D:\SFML-2.3.1\include" /ID:\freeglut\include /I"D:\glew-1.13.0\include" /Zi /nologo /W3 /WX- /O2 /Oi /Oy- /GL /D SFML_STATIC /D WIN32 /D NDEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Release\\" /Fd"Release\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt camera.cpp cat.cpp core.cpp direction.cpp fadma.cpp frame_buffer.cpp glob.cpp hot_vars.cpp input.cpp lodepng.cpp main.cpp math.cpp object.cpp pure_opengl.cpp read_write.cpp Renderer.cpp rgba_array.cpp solid.cpp space.cpp static_im.cpp
          camera.cpp
+     1>c:\users\user\documents\visual studio 2012\projects\play_me\play_me\math_3d.h(161): warning C4244: '=' : conversion from 'const int' to 'float', possible loss of data
+     1>c:\users\user\documents\visual studio 2012\projects\play_me\play_me\math_3d.h(162): warning C4244: '=' : conversion from 'const int' to 'float', possible loss of data
+     1>c:\users\user\documents\visual studio 2012\projects\play_me\play_me\math_3d.h(170): warning C4005: 'FOR' : macro redefinition
+                 c:\users\user\documents\visual studio 2012\projects\play_me\play_me\fadma.h(25) : see previous definition of 'FOR'
+         cat.cpp
+     1>c:\users\user\documents\visual studio 2012\projects\play_me\play_me\math_3d.h(161): warning C4244: '=' : conversion from 'const int' to 'float', possible loss of data
+     1>c:\users\user\documents\visual studio 2012\projects\play_me\play_me\math_3d.h(162): warning C4244: '=' : conversion from 'const int' to 'float', possible loss of data
+     1>c:\users\user\documents\visual studio 2012\projects\play_me\play_me\math_3d.h(170): warning C4005: 'FOR' : macro redefinition
+                 c:\users\user\documents\visual studio 2012\projects\play_me\play_me\fadma.h(25) : see previous definition of 'FOR'
+     1>cat.cpp(41): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
+     1>cat.cpp(51): warning C4244: '=' : conversion from 'float' to 'int', possible loss of data
+     1>cat.cpp(63): warning C4305: '=' : truncation from 'double' to 'float'
+     1>cat.cpp(81): warning C4244: '=' : conversion from 'float' to 'int', possible loss of data
+     1>cat.cpp(82): warning C4244: '=' : conversion from 'float' to 'int', possible loss of data
+     1>cat.cpp(142): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
+         core.cpp
+     1>c:\users\user\documents\visual studio 2012\projects\play_me\play_me\math_3d.h(161): warning C4244: '=' : conversion from 'const int' to 'float', possible loss of data
+     1>c:\users\user\documents\visual studio 2012\projects\play_me\play_me\math_3d.h(162): warning C4244: '=' : conversion from 'const int' to 'float', possible loss of data
+     1>c:\users\user\documents\visual studio 2012\projects\play_me\play_me\math_3d.h(170): warning C4005: 'FOR' : macro redefinition
+                 c:\users\user\documents\visual studio 2012\projects\play_me\play_me\fadma.h(25) : see previous definition of 'FOR'
+         direction.cpp
+     1>c:\users\user\documents\visual studio 2012\projects\play_me\play_me\math_3d.h(161): warning C4244: '=' : conversion from 'const int' to 'float', possible loss of data
+     1>c:\users\user\documents\visual studio 2012\projects\play_me\play_me\math_3d.h(162): warning C4244: '=' : conversion from 'const int' to 'float', possible loss of data
+         fadma.cpp
+         frame_buffer.cpp
+     1>c:\users\user\documents\visual studio 2012\projects\play_me\play_me\math_3d.h(161): warning C4244: '=' : conversion from 'const int' to 'float', possible loss of data
+     1>c:\users\user\documents\visual studio 2012\projects\play_me\play_me\math_3d.h(162): warning C4244: '=' : conversion from 'const int' to 'float', possible loss of data
+     1>c:\users\user\documents\visual studio 2012\projects\play_me\play_me\fadma.h(25): warning C4005: 'FOR' : macro redefinition
+                 c:\users\user\documents\visual studio 2012\projects\play_me\play_me\math_3d.h(170) : see previous definition of 'FOR'
+     1>frame_buffer.cpp(10): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
+     1>frame_buffer.cpp(22): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\include\stdio.h(218) : see declaration of 'fopen'
+     1>frame_buffer.cpp(24): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\include\stdio.h(237) : see declaration of 'fscanf'
+     1>frame_buffer.cpp(53): warning C4244: '+=' : conversion from 'double' to 'float', possible loss of data
+     1>frame_buffer.cpp(75): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
+         glob.cpp
+     1>glob.cpp(8): warning C4244: '=' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>glob.cpp(9): warning C4244: '=' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>glob.cpp(10): warning C4244: '=' : conversion from 'float' to 'sf::Uint8', possible loss of data
+         hot_vars.cpp
+     1>c:\users\user\documents\visual studio 2012\projects\play_me\play_me\glob.h(12): warning C4005: 'D_' : macro redefinition
+                 c:\users\user\documents\visual studio 2012\projects\play_me\play_me\hot_vars.h(54) : see previous definition of 'D_'
+         input.cpp
+     1>c:\users\user\documents\visual studio 2012\projects\play_me\play_me\math_3d.h(161): warning C4244: '=' : conversion from 'const int' to 'float', possible loss of data
+     1>c:\users\user\documents\visual studio 2012\projects\play_me\play_me\math_3d.h(162): warning C4244: '=' : conversion from 'const int' to 'float', possible loss of data
+     1>c:\users\user\documents\visual studio 2012\projects\play_me\play_me\fadma.h(25): warning C4005: 'FOR' : macro redefinition
+                 c:\users\user\documents\visual studio 2012\projects\play_me\play_me\math_3d.h(170) : see previous definition of 'FOR'
+         lodepng.cpp
+         main.cpp
+     1>c:\users\user\documents\visual studio 2012\projects\play_me\play_me\math_3d.h(161): warning C4244: '=' : conversion from 'const int' to 'float', possible loss of data
+     1>c:\users\user\documents\visual studio 2012\projects\play_me\play_me\math_3d.h(162): warning C4244: '=' : conversion from 'const int' to 'float', possible loss of data
+     1>c:\users\user\documents\visual studio 2012\projects\play_me\play_me\fadma.h(25): warning C4005: 'FOR' : macro redefinition
+                 c:\users\user\documents\visual studio 2012\projects\play_me\play_me\math_3d.h(170) : see previous definition of 'FOR'
+         math.cpp
+     1>c:\users\user\documents\visual studio 2012\projects\play_me\play_me\math_3d.h(161): warning C4244: '=' : conversion from 'const int' to 'float', possible loss of data
+     1>c:\users\user\documents\visual studio 2012\projects\play_me\play_me\math_3d.h(162): warning C4244: '=' : conversion from 'const int' to 'float', possible loss of data
+     1>math.cpp(27): warning C4244: '*=' : conversion from 'const float' to 'int', possible loss of data
+     1>math.cpp(28): warning C4244: '*=' : conversion from 'const float' to 'int', possible loss of data
+     1>math.cpp(33): warning C4244: '/=' : conversion from 'const float' to 'int', possible loss of data
+     1>math.cpp(34): warning C4244: '/=' : conversion from 'const float' to 'int', possible loss of data
+     1>math.cpp(51): warning C4244: 'argument' : conversion from 'const float' to 'int', possible loss of data
+     1>math.cpp(55): warning C4244: 'argument' : conversion from 'const float' to 'int', possible loss of data
+     1>math.cpp(60): warning C4244: '=' : conversion from 'const float' to 'int', possible loss of data
+     1>math.cpp(61): warning C4244: '=' : conversion from 'const float' to 'int', possible loss of data
+     1>math.cpp(121): warning C4244: 'return' : conversion from 'double' to 'float', possible loss of data
+         object.cpp
+     1>c:\users\user\documents\visual studio 2012\projects\play_me\play_me\math_3d.h(161): warning C4244: '=' : conversion from 'const int' to 'float', possible loss of data
+     1>c:\users\user\documents\visual studio 2012\projects\play_me\play_me\math_3d.h(162): warning C4244: '=' : conversion from 'const int' to 'float', possible loss of data
+     1>c:\users\user\documents\visual studio 2012\projects\play_me\play_me\math_3d.h(170): warning C4005: 'FOR' : macro redefinition
+                 c:\users\user\documents\visual studio 2012\projects\play_me\play_me\fadma.h(25) : see previous definition of 'FOR'
+         pure_opengl.cpp
+     1>c:\users\user\documents\visual studio 2012\projects\play_me\play_me\math_3d.h(161): warning C4244: '=' : conversion from 'const int' to 'float', possible loss of data
+     1>c:\users\user\documents\visual studio 2012\projects\play_me\play_me\math_3d.h(162): warning C4244: '=' : conversion from 'const int' to 'float', possible loss of data
+     1>c:\users\user\documents\visual studio 2012\projects\play_me\play_me\fadma.h(25): warning C4005: 'FOR' : macro redefinition
+                 c:\users\user\documents\visual studio 2012\projects\play_me\play_me\math_3d.h(170) : see previous definition of 'FOR'
+         read_write.cpp
+     1>c:\users\user\documents\visual studio 2012\projects\play_me\play_me\math_3d.h(161): warning C4244: '=' : conversion from 'const int' to 'float', possible loss of data
+     1>c:\users\user\documents\visual studio 2012\projects\play_me\play_me\math_3d.h(162): warning C4244: '=' : conversion from 'const int' to 'float', possible loss of data
+     1>c:\users\user\documents\visual studio 2012\projects\play_me\play_me\fadma.h(25): warning C4005: 'FOR' : macro redefinition
+                 c:\users\user\documents\visual studio 2012\projects\play_me\play_me\math_3d.h(170) : see previous definition of 'FOR'
+     1>read_write.cpp(25): warning C4996: 'scanf': This function or variable may be unsafe. Consider using scanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\include\stdio.h(290) : see declaration of 'scanf'
+     1>read_write.cpp(32): warning C4996: 'scanf': This function or variable may be unsafe. Consider using scanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\include\stdio.h(290) : see declaration of 'scanf'
+     1>read_write.cpp(39): warning C4996: 'scanf': This function or variable may be unsafe. Consider using scanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\include\stdio.h(290) : see declaration of 'scanf'
+     1>read_write.cpp(41): warning C4996: 'scanf': This function or variable may be unsafe. Consider using scanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\include\stdio.h(290) : see declaration of 'scanf'
+     1>read_write.cpp(48): warning C4996: 'scanf': This function or variable may be unsafe. Consider using scanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\include\stdio.h(290) : see declaration of 'scanf'
+     1>read_write.cpp(50): warning C4996: 'scanf': This function or variable may be unsafe. Consider using scanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\include\stdio.h(290) : see declaration of 'scanf'
+         Renderer.cpp
+     1>c:\users\user\documents\visual studio 2012\projects\play_me\play_me\math_3d.h(161): warning C4244: '=' : conversion from 'const int' to 'float', possible loss of data
+     1>c:\users\user\documents\visual studio 2012\projects\play_me\play_me\math_3d.h(162): warning C4244: '=' : conversion from 'const int' to 'float', possible loss of data
+     1>c:\users\user\documents\visual studio 2012\projects\play_me\play_me\fadma.h(25): warning C4005: 'FOR' : macro redefinition
+                 c:\users\user\documents\visual studio 2012\projects\play_me\play_me\math_3d.h(170) : see previous definition of 'FOR'
+     1>Renderer.cpp(32): warning C4305: 'argument' : truncation from 'double' to 'float'
+         rgba_array.cpp
+     1>c:\users\user\documents\visual studio 2012\projects\play_me\play_me\math_3d.h(161): warning C4244: '=' : conversion from 'const int' to 'float', possible loss of data
+     1>c:\users\user\documents\visual studio 2012\projects\play_me\play_me\math_3d.h(162): warning C4244: '=' : conversion from 'const int' to 'float', possible loss of data
+     1>c:\users\user\documents\visual studio 2012\projects\play_me\play_me\fadma.h(25): warning C4005: 'FOR' : macro redefinition
+                 c:\users\user\documents\visual studio 2012\projects\play_me\play_me\math_3d.h(170) : see previous definition of 'FOR'
+     1>rgba_array.cpp(31): warning C4244: '=' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>rgba_array.cpp(32): warning C4244: '=' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>rgba_array.cpp(33): warning C4244: '=' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>rgba_array.cpp(34): warning C4244: '=' : conversion from 'double' to 'sf::Uint8', possible loss of data
+     1>rgba_array.cpp(75): warning C4244: 'argument' : conversion from 'int' to 'const float', possible loss of data
+     1>rgba_array.cpp(82): warning C4244: '=' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>rgba_array.cpp(83): warning C4244: '=' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>rgba_array.cpp(84): warning C4244: '=' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>rgba_array.cpp(85): warning C4244: '=' : conversion from 'double' to 'sf::Uint8', possible loss of data
+     1>rgba_array.cpp(89): warning C4244: 'argument' : conversion from 'int' to 'const float', possible loss of data
+     1>rgba_array.cpp(102): warning C4244: 'argument' : conversion from 'int' to 'const float', possible loss of data
+     1>rgba_array.cpp(118): warning C4244: 'argument' : conversion from 'int' to 'const float', possible loss of data
+     1>rgba_array.cpp(125): warning C4244: '=' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>rgba_array.cpp(126): warning C4244: '=' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>rgba_array.cpp(127): warning C4244: '=' : conversion from 'float' to 'sf::Uint8', possible loss of data
+     1>rgba_array.cpp(128): warning C4244: '=' : conversion from 'double' to 'sf::Uint8', possible loss of data
+     1>rgba_array.cpp(132): warning C4244: 'argument' : conversion from 'int' to 'const float', possible loss of data
+         solid.cpp
+     1>c:\users\user\documents\visual studio 2012\projects\play_me\play_me\math_3d.h(161): warning C4244: '=' : conversion from 'const int' to 'float', possible loss of data
+     1>c:\users\user\documents\visual studio 2012\projects\play_me\play_me\math_3d.h(162): warning C4244: '=' : conversion from 'const int' to 'float', possible loss of data
+     1>c:\users\user\documents\visual studio 2012\projects\play_me\play_me\math_3d.h(170): warning C4005: 'FOR' : macro redefinition
+                 c:\users\user\documents\visual studio 2012\projects\play_me\play_me\fadma.h(25) : see previous definition of 'FOR'
+         space.cpp
+     1>c:\users\user\documents\visual studio 2012\projects\play_me\play_me\math_3d.h(161): warning C4244: '=' : conversion from 'const int' to 'float', possible loss of data
+     1>c:\users\user\documents\visual studio 2012\projects\play_me\play_me\math_3d.h(162): warning C4244: '=' : conversion from 'const int' to 'float', possible loss of data
+     1>c:\users\user\documents\visual studio 2012\projects\play_me\play_me\math_3d.h(170): warning C4005: 'FOR' : macro redefinition
+                 c:\users\user\documents\visual studio 2012\projects\play_me\play_me\fadma.h(25) : see previous definition of 'FOR'
+     1>space.cpp(9): warning C4996: 'freopen': This function or variable may be unsafe. Consider using freopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\include\stdio.h(233) : see declaration of 'freopen'
+         static_im.cpp
      1>c:\users\user\documents\visual studio 2012\projects\play_me\play_me\math_3d.h(161): warning C4244: '=' : conversion from 'const int' to 'float', possible loss of data
      1>c:\users\user\documents\visual studio 2012\projects\play_me\play_me\math_3d.h(162): warning C4244: '=' : conversion from 'const int' to 'float', possible loss of data
      1>c:\users\user\documents\visual studio 2012\projects\play_me\play_me\math_3d.h(170): warning C4005: 'FOR' : macro redefinition
@@ -36,4 +170,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:09.24
+Time Elapsed 00:00:49.87

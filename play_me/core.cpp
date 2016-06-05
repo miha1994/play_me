@@ -13,6 +13,7 @@ void Core::init () {
 }
 
 void Core::update (float dt) {
+	//dt/=3;  // понижаем скорость движения кота
 	in.upd ();
 	rand ();
 	if (m_current_state == State_PLATFORM_REDACTOR && !in.kb.ctrl.pressed_now) {
