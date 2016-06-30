@@ -1,6 +1,7 @@
 #include "frame_buffer.h"
 #include "lodepng.h"
 #include "core.h"
+#include "png.h"
 
 #define D_CURRENT_INSTR			m_instructions[m_current_instruction]
 
@@ -11,13 +12,9 @@ void frames::init (string file_name) {
 	m_current_instruction = 0;
 
 	m_current_frame = 0;
-	unsigned int w,h;
 	rgba_array rgb (true);
-	vector <unsigned char> cpy;
-	auto err = lodepng::decode (cpy, w, h, Texture_name (file_name));
-	if(err) std::cout << "decoder error " << err << ": " << lodepng_error_text(err) << std::endl;
-	rgb.init (w,h);
-	memcpy (rgb, &cpy[0], w*h*4);
+	load_png (rgb, Texture_name (file_name));
+	unsigned w = rgb.get_W (), h = rgb.get_H ();
 
 	FILE *read = fopen ((prefix_path + "tex/" + file_name + "_info.an").c_str (), "r");
 	int rw, rh;

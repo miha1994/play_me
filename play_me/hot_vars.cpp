@@ -7,9 +7,9 @@
 
 using namespace std;
 
-___hot_vars::___hot_vars () {
+___hot_vars::___hot_vars (string file) {
     ifstream in;
-	in.open (prefix_path + "inf/hot_vars.txt");
+	in.open (prefix_path + "inf/" + file + ".txt");
     string s;
     int state = -1;
     while (in >> s) {
@@ -61,4 +61,4 @@ label:
     }
 }
 
-___hot_vars hot_vars;
+___hot_vars hot_vars ("hv");

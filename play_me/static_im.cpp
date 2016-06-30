@@ -5,10 +5,36 @@
 #include "camera.h"
 #include "input.h"
 #include "solid.h"
+#include "glob_vars.h"
+#include "hot_vars.h"
+#include "png.h"
 
 void static_im::render (State state) {
 	camera *cam = D_PLATFORM (camera);
-	D_ADD_SPRITE (m_bg, -cam->m_pos);
+	if (state == State_PLATFORM_GAME) {
+		v2i pos (0,0);
+		int &x = pos.x;
+		int cx = -cam->m_pos.x / 2;
+		cx %= D_W;
+		while (cx < 0) {
+			cx += D_W;
+		}
+		x = cx;
+
+		ren.sprite.rgba_ar = &m_real_bg;
+		ren.sprite.pos = pos;
+		ren.m_render_list.insert (ren.m_render_list.begin(), ren.sprite);
+
+		x = cx - D_W;
+		ren.sprite.pos = pos;
+		ren.m_render_list.insert (ren.m_render_list.begin(), ren.sprite);
+		D_ADD_SPRITE (m_fg, -cam->m_pos);
+	} else {
+		D_ADD_SPRITE (m_fg, -cam->m_pos);
+		ren.sprite.rgba_ar = &m_bg;
+		ren.sprite.pos = -cam->m_pos;
+		ren.m_render_list.insert (ren.m_render_list.begin(), ren.sprite);
+	}
 }
 
 void static_im::update (State state, float dt) {
@@ -21,6 +47,8 @@ void static_im::update (State state, float dt) {
 			if (in.kb['M'].just_pressed) {
 				v2i nsize (in.mouse.pos + cam->m_pos);
 				int w = nsize.x, h = nsize.y;
+				GV.lists[S_[0]].I["w"] = w;
+				GV.lists[S_[0]].I["h"] = h;
 				auto cpy = m_bg;
 				m_bg.destroy ();
 				m_bg.init (w, h);
@@ -64,8 +92,17 @@ void static_im::clean () {
 }
 
 void static_im::load () {
-	m_bg.init (D_W, D_H);
+	m_bg.init (GV.lists[S_[0]].I["w"], GV.lists[S_[0]].I["h"]);
 	m_bg.clear (CLR (140,140,140,255));
+
+	if (!load_png (m_real_bg, prefix_path + "tex/" + S_[0] + "/bg.png")) {
+		exit (0);
+	}
+	if (!load_png (m_fg, prefix_path + "tex/" + S_[0] + "/fg.png")) {
+		exit (0);
+	} else {
+		m_fg.alpha_matters = true;
+	}
 
 	read_string (); // "}"
 }

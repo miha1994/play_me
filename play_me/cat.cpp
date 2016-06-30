@@ -4,6 +4,8 @@
 #include "core.h"
 #include "solid.h"
 #include "camera.h"
+#include "glob_vars.h"
+#include "hot_vars.h"
 
 #define D_VELOCITY_X_MAX	230
 #define D_VELOCITY_Y_MAX	400
@@ -29,6 +31,9 @@ void cat::update (State state, float dt) {
 	camera *cam = D_PLATFORM (camera);
 	int y_offset = 0;
 	int x_offset = 0;
+
+	GV.lists[S_[0]].I["cat_x"] = m_pos.x;
+	GV.lists[S_[0]].I["cat_y"] = m_pos.y;
 	if (state == State_PLATFORM_GAME) {
 		switch (m_state) {
 		case Cat_on_floor:  // когда мы на полу
@@ -184,11 +189,12 @@ void cat::update (State state, float dt) {
 		}
 	} else if (state == State_PLATFORM_REDACTOR) {  // если мы не в игре, в режиме редактирования
 		if (core.m_active_type == Cat) {			// если юзер работает с котом, то кот бегает за его мышкой
-			m_pos = in.mouse.pos + cam->m_pos;
-			m_frames.m_pos = m_pos;
-		} else {									// ... это работает!
-			m_frames.m_pos = m_pos;
+			if (in.mouse.left.pressed_now) {
+				m_pos = in.mouse.pos + cam->m_pos;
+				m_frames.m_pos = m_pos;
+			}
 		}
+		m_frames.m_pos = m_pos;
 	}
 }
 
@@ -203,7 +209,13 @@ void cat::load () { // загрузка/создание кота
 	m_time_to_next_movement = 1;  // 1 секунда до след кадра
 	m_frames.init ("cat");
 	m_frames.m_fps = 10;
-	m_pos = m_frames.m_pos = v2i (150, 100);
+	if (D_CONTAINES (GV.lists, S_[0])) {
+		m_pos = m_frames.m_pos = v2i (GV.lists[S_[0]].I["cat_x"], GV.lists[S_[0]].I["cat_y"]);
+	} else {
+		m_pos = m_frames.m_pos = v2i (150, 100);
+		GV.lists[S_[0]].I["cat_x"] = 150;
+		GV.lists[S_[0]].I["cat_y"] = 100;
+	}
 	m_frames.m_instructions.push_back (frames::command (0, 1, 0, 1, 30));  //цикличное стояние на месте
 	m_frames.m_instructions.push_back (frames::command (1, 2, 0, 1, 8));
 	m_frames.m_instructions.push_back (frames::command (2, 8, 0, 1, 8));

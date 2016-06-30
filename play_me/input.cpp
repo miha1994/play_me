@@ -25,6 +25,7 @@ void button_state::_upd (bool new_v) {
 }
 
 void input::upd () {
+	sf::Joystick::update();
 	auto a = sf::Mouse::getPosition ();
 	mouse.pos.x = a.x;
 	mouse.pos.y = a.y;
@@ -47,10 +48,11 @@ void input::upd () {
 	kb.alt._upd (kb_::isKeyPressed (kb_::LAlt) || kb_::isKeyPressed (kb_::RAlt));
 	kb.shift._upd (kb_::isKeyPressed (kb_::LShift) || kb_::isKeyPressed (kb_::RShift));
 	kb.escape._upd (kb_::isKeyPressed (kb_::Escape));
-	kb.space._upd (kb_::isKeyPressed (kb_::Space));
+	kb.space._upd (kb_::isKeyPressed (kb_::Space) || sf::Joystick::isButtonPressed(0, 0));
 	kb.delete_._upd (kb_::isKeyPressed (kb_::Delete));
-	kb.dirs[D_RIGHT]._upd (kb_::isKeyPressed (kb_::Right));
-	kb.dirs[D_LEFT]._upd (kb_::isKeyPressed (kb_::Left));
+	float x = sf::Joystick::getAxisPosition(0, sf::Joystick::X);
+	kb.dirs[D_RIGHT]._upd (kb_::isKeyPressed (kb_::Right) || x > 30);
+	kb.dirs[D_LEFT]._upd (kb_::isKeyPressed (kb_::Left) || x < -30);
 	kb.dirs[D_UP]._upd (kb_::isKeyPressed (kb_::Up));
 	kb.dirs[D_DOWN]._upd (kb_::isKeyPressed (kb_::Down));
 }

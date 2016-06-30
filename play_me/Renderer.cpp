@@ -18,6 +18,11 @@ void Renderer::draw_everything () {
 	}
 	m_render_list.clear ();
 
+	forstl (p, m_sp_effect_square) {
+		p->apply (m_tex_array);
+	}
+	m_sp_effect_square.clear ();
+
 	//  old school screen effect
 	if (in.kb['A'].pressed_now) {
 		rgba_array na (m_tex_array);
@@ -87,3 +92,39 @@ void Renderer::init () {
 void Renderer::add_sprite_to_render_list () {
 	m_render_list.push_back (sprite);
 }
+
+
+
+#define def_loop		For (radius + i) { \
+			src = dst + offset; \
+			if (ar << dst && ar << src) { \
+				ar[dst] = ar[src]; \
+			} \
+			dst = dst + stp; \
+		}
+
+void Renderer::sp_effect_square_info::apply (rgba_array &ar) {
+	v2i strt;
+	v2i stp, offset;
+	v2i src, dst;
+	FOR (i, thickness) {
+		strt = v2i (0, -(radius+i));
+		stp = v2i(1,1), offset = v2i(-thickness, thickness);
+		dst = pos + strt;
+		def_loop;
+		strt = v2i (0, (radius+i));
+		stp = v2i(1,-1), offset = v2i(-thickness, -thickness);
+		dst = pos + strt;
+		def_loop;
+		strt = v2i (0, -(radius+i));
+		stp = v2i(-1,1), offset = v2i(thickness, thickness);
+		dst = pos + strt;
+		def_loop;
+		strt = v2i (0, (radius+i));
+		stp = v2i(-1,-1), offset = v2i(thickness, -thickness);
+		dst = pos + strt;
+		def_loop;
+	}
+}
+
+#undef def_loop

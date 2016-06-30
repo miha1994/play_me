@@ -6,6 +6,8 @@
 
 struct static_im : Object {
 	rgba_array m_bg;
+	rgba_array m_real_bg;
+	rgba_array m_fg;
 
 	void render (State state);
 	void update (State state, float dt);

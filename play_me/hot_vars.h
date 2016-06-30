@@ -45,7 +45,7 @@ struct ___hot_vars {
     std::vector <double> double_;
     std::vector <int> int_;
     std::vector <std::string> string_;
-    ___hot_vars ();
+    ___hot_vars (std::string file);
 };
 
 extern ___hot_vars hot_vars;

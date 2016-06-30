@@ -18,3 +18,6 @@ void write (int i, std::string comment = "");
 void write (float f, std::string comment = "");
 void write (v2f v, std::string comment = "");
 void write (v2i v, std::string comment = "");
+
+#define Write(f, what)	fwrite (&(what), sizeof(what), 1, f)
+#define Read(f, what)	fread (&(what), sizeof(what), 1, f)

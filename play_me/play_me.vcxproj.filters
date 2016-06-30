@@ -75,6 +75,15 @@
     <ClCompile Include="camera.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="glob_vars.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="png.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="item.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="array_2d.h">
@@ -140,15 +149,27 @@
     <ClInclude Include="camera.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="glob_vars.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="png.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="item.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="D:\res\inf\platform_space.txt">
       <Filter>Resource Files</Filter>
     </Text>
-    <Text Include="D:\res\inf\hot_vars.txt">
+    <Text Include="D:\res\inf\copy.txt">
       <Filter>Resource Files</Filter>
     </Text>
-    <Text Include="D:\res\inf\copy.txt">
+    <Text Include="D:\res\inf\hv.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="D:\res\inf\gv.txt">
       <Filter>Resource Files</Filter>
     </Text>
   </ItemGroup>

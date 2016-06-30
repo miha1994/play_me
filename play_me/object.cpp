@@ -4,6 +4,7 @@
 #include "solid.h"
 #include "static_im.h"
 #include "camera.h"
+#include "item.h"
 
 // фабрика объектов
 Object *new_Object (string id) {
@@ -26,6 +27,11 @@ Object *new_Object (string id) {
 	CASE ("camera") {
 		camera *o = new camera;
 		o->m_type = Type::Camera;
+		return o;
+	}
+	CASE ("item") {
+		item *o = new item;
+		o->m_type = Type::Item;
 		return o;
 	}
 	DEFAULT {

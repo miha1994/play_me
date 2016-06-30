@@ -10,6 +10,8 @@ struct solid : Object {
 	rgba_array m_tmp;
 	rgba_array m_map_visualisation;
 	v2i m_tmp_pos;
+	int m_thick;
+	bool m_draw_in_game_mode;
 
 	void render (State state);
 	void update (State state, float dt);

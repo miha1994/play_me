@@ -89,12 +89,15 @@
     <ClCompile Include="fadma.cpp" />
     <ClCompile Include="frame_buffer.cpp" />
     <ClCompile Include="glob.cpp" />
+    <ClCompile Include="glob_vars.cpp" />
     <ClCompile Include="hot_vars.cpp" />
     <ClCompile Include="input.cpp" />
+    <ClCompile Include="item.cpp" />
     <ClCompile Include="lodepng.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="math.cpp" />
     <ClCompile Include="object.cpp" />
+    <ClCompile Include="png.cpp" />
     <ClCompile Include="pure_opengl.cpp" />
     <ClCompile Include="read_write.cpp" />
     <ClCompile Include="Renderer.cpp" />
@@ -112,11 +115,14 @@
     <ClInclude Include="fadma.h" />
     <ClInclude Include="frame_buffer.h" />
     <ClInclude Include="glob.h" />
+    <ClInclude Include="glob_vars.h" />
     <ClInclude Include="hot_vars.h" />
     <ClInclude Include="input.h" />
+    <ClInclude Include="item.h" />
     <ClInclude Include="lodepng.h" />
     <ClInclude Include="math_3d.h" />
     <ClInclude Include="object.h" />
+    <ClInclude Include="png.h" />
     <ClInclude Include="pure_opengl.h" />
     <ClInclude Include="read_write.h" />
     <ClInclude Include="Renderer.h" />
@@ -128,7 +134,8 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="D:\res\inf\copy.txt" />
-    <Text Include="D:\res\inf\hot_vars.txt" />
+    <Text Include="D:\res\inf\gv.txt" />
+    <Text Include="D:\res\inf\hv.txt" />
     <Text Include="D:\res\inf\platform_space.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

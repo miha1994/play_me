@@ -5,5 +5,6 @@ enum Type {
 	Cat,
 	Solid,
 	Static_im,
-	Camera
+	Camera,
+	Item
 };

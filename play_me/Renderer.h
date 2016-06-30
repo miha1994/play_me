@@ -30,6 +30,13 @@
 									ren.sprite.scale = _scale; \
 									ren.add_sprite_to_render_list (); \
 									ren.sprite.scale = 1; } while (0)
+#define D_ADD_SP_EFFECT_SQUARE(_pos, _radius, _thickness) \
+									do {					\
+									ren.sp_effect_square.pos = _pos;	\
+									ren.sp_effect_square.radius = _radius;	\
+									ren.sp_effect_square.thickness = _thickness;	\
+									ren.m_sp_effect_square.push_back (ren.sp_effect_square);	\
+									} while (0)
 
 // сокращение обращения к нашему рендерщику
 #define ren	core.m_renderer
@@ -49,9 +56,18 @@ struct Renderer {
 		v2i pos;
 		int scale;
 	};
+	struct sp_effect_square_info {
+		v2i pos;
+		int radius;
+		int thickness;
+
+		void apply (rgba_array &ar);
+	};
 	list <sprite_info> m_render_list;	// список спрайтов (очередь на редеринг)
 	sprite_info sprite;			// спрайт будет использоваться для добавления его в очередь. Каждое добавление спрайта в очередь заключается в изменении этого члена и вызова add_sprite_to_render_list ()
 	Vertex_tex m_screen[4];			// наш экран в виде четырех вершин. Нужен опенгл при рисовании текстуры
+	list <sp_effect_square_info> m_sp_effect_square;
+	sp_effect_square_info sp_effect_square;
 	void draw_everything ();		// рисуем всю очередь m_render_list, создаем текстуру, рисуем ее на экран
 	void init ();		//  инициализация
 	void add_sprite_to_render_list ();	// добавление спрайта в очередь

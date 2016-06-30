@@ -20,6 +20,7 @@ inline double deg_ (double radian);		// перевод угла из радиан в градусы
 #define _FOR(I,N_)				_FOR_ (I, 0, N_)							// с использованием цикла for
 #define forstl(p,stl)			for (auto p = (stl).begin (), end = (stl).end (); p != end; ++p)
 #define forstl_p(p,stl)			for (auto p : (stl))
+#define forstl_no_inc(p,stl)	for (auto p = (stl).begin (); p != (stl).end (); )
 
 #define FOR_(I,INITVALUE,N_)	for (int I = (INITVALUE), variable_N = (N_); I < variable_N; ++I)
 #define FOR(I,N_)				FOR_ (I, 0, N_)

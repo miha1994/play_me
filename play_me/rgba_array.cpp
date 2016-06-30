@@ -26,6 +26,10 @@ void rgba_array::draw (rgba_array *src, v2i pos) {
 				continue;
 			}
 			d = &this->at (pos + v);
+			if (s->a > 253) {
+				*d = *s;
+				continue;
+			}
 			d_p = (1 - (s->a / 255.0f)) * (d->a / 255.0f);
 			s_p = 1 - d_p;
 			d->r = d_p * d->r + s_p * s->r;
@@ -77,6 +81,10 @@ void rgba_array::draw (rgba_array *src, v2i pos, int scale, v2i max_size) {
 				continue;
 			}
 			d = &this->at (pos + v);
+			if (s->a > 253) {
+				*d = *s;
+				continue;
+			}
 			d_p = (1 - (s->a / 255.0f)) * (d->a / 255.0f);
 			s_p = 1 - d_p;
 			d->r = d_p * d->r + s_p * s->r;
@@ -120,6 +128,10 @@ void rgba_array::draw (rgba_array *src, v2i pos, int scale, v2i max_size, v2i sr
 				continue;
 			}
 			d = &this->at (pos + v);
+			if (s->a > 253) {
+				*d = *s;
+				continue;
+			}
 			d_p = (1 - (s->a / 255.0f)) * (d->a / 255.0f);
 			s_p = 1 - d_p;
 			d->r = d_p * d->r + s_p * s->r;
