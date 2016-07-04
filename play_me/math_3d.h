@@ -188,17 +188,32 @@ struct Vertex_tex {
 };
 
 // прямоугольник со сторонами, параллельными осям координат. Просто геометрич. фигура
-template <class T>
-struct Rect {
-	Vector2 <T> pos;  // верхняя левая точка
-	Vector2 <T> size;	// ширина высота
-	Rect () {}
-	Rect (Vector2 <T> _pos, Vector2 <T> _size) {
+struct IntRect {
+	v2i pos;  // верхняя левая точка
+	v2i size;	// ширина высота
+	IntRect () {}
+	IntRect (v2i _pos, v2i _size) {
 		pos = _pos;
 		size = _size;
 	}
 	//принадлежит ли точка прямоугольнику
-	bool operator << (Vector2 <T> v) {
+	bool operator << (v2i v) {
+		return v.x >= pos.x && v.x < pos.x + size.x &&
+			v.y >= pos.y && v.y < pos.y + size.y;
+	}
+};
+
+// прямоугольник со сторонами, параллельными осям координат. Просто геометрич. фигура
+struct FloatRect {
+	v2f pos;  // верхняя левая точка
+	v2f size;	// ширина высота
+	FloatRect () {}
+	FloatRect (v2f _pos, v2f _size) {
+		pos = _pos;
+		size = _size;
+	}
+	//принадлежит ли точка прямоугольнику
+	bool operator << (v2f v) {
 		return v.x >= pos.x && v.x < pos.x + size.x &&
 			v.y >= pos.y && v.y < pos.y + size.y;
 	}

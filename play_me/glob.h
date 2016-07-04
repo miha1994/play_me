@@ -10,7 +10,7 @@ extern string prefix_path;		// путь к папке с ресурсами (текстурами, шрифтами, з
 extern GLuint gSampler;	// deep and dark opengl
 
 #define D_(v)	(v).x][(v).y		// используется для замены вот такого кода:  v2i v; int a[10][10]; a[v.x][v.y] = 0;   на такой: a[D_(v)]
-#define Texture_name(name)	(prefix_folder + "res/tex/" + string (name) + ".png")	// преобразователь имени текстуры в полное название файла текстуры
+#define Texture_name(name)	(prefix_path + "tex/" + string (name) + ".png")	// преобразователь имени текстуры в полное название файла текстуры
 
 #define CLR		sf::Color
 #define D_CONTAINES(stl, obj)		((stl).find (obj) != (stl).end ())

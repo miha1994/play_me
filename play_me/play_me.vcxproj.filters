@@ -84,6 +84,9 @@
     <ClCompile Include="item.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="particle_system.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="array_2d.h">
@@ -158,11 +161,11 @@
     <ClInclude Include="item.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="particle_system.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="D:\res\inf\platform_space.txt">
-      <Filter>Resource Files</Filter>
-    </Text>
     <Text Include="D:\res\inf\copy.txt">
       <Filter>Resource Files</Filter>
     </Text>
@@ -170,6 +173,9 @@
       <Filter>Resource Files</Filter>
     </Text>
     <Text Include="D:\res\inf\gv.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="res\inf\platform_space.txt">
       <Filter>Resource Files</Filter>
     </Text>
   </ItemGroup>

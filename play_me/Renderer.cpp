@@ -4,6 +4,7 @@
 #include "input.h"
 
 bool g_fullscreen = 0;
+
 GLfloat colors[D_W*D_H];
 GLuint colors_location;
 
@@ -17,6 +18,11 @@ void Renderer::draw_everything () {
 		m_tex_array.draw (p->rgba_ar, p->pos, p->scale);
 	}
 	m_render_list.clear ();
+
+	forstl (p, m_render_alpha_list) {
+		m_tex_array.draw_alpha (p->rgba_ar, p->pos, p->alpha1);
+	}
+	m_render_alpha_list.clear ();
 
 	forstl (p, m_sp_effect_square) {
 		p->apply (m_tex_array);

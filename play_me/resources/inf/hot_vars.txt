@@ -1,0 +1,9 @@
+%string
+"fly_sq"
+#"font"
+#"items"
+#"0_0_0"
+"cat"
+
+%int
+0

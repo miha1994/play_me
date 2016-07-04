@@ -5,7 +5,7 @@
 #include "glob.h"
 
 Space::Space (string name) {
-	string tmp_str = prefix_folder + "res/inf/" + name + "_space.txt";
+	string tmp_str = prefix_path + "inf/" + name + "_space.txt";
 	freopen (tmp_str.c_str (), "r", stdin);
 	read_string (); // "{"
 	string chapter;

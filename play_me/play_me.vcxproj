@@ -97,6 +97,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="math.cpp" />
     <ClCompile Include="object.cpp" />
+    <ClCompile Include="particle_system.cpp" />
     <ClCompile Include="png.cpp" />
     <ClCompile Include="pure_opengl.cpp" />
     <ClCompile Include="read_write.cpp" />
@@ -122,6 +123,7 @@
     <ClInclude Include="lodepng.h" />
     <ClInclude Include="math_3d.h" />
     <ClInclude Include="object.h" />
+    <ClInclude Include="particle_system.h" />
     <ClInclude Include="png.h" />
     <ClInclude Include="pure_opengl.h" />
     <ClInclude Include="read_write.h" />
@@ -136,7 +138,7 @@
     <Text Include="D:\res\inf\copy.txt" />
     <Text Include="D:\res\inf\gv.txt" />
     <Text Include="D:\res\inf\hv.txt" />
-    <Text Include="D:\res\inf\platform_space.txt" />
+    <Text Include="res\inf\platform_space.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

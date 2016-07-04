@@ -80,6 +80,8 @@ void camera::update (State state, float dt) {
 		}
 
 		m_pos -= v2i (D_W/2, D_H/2);
+		GV.lists[S_[0]].I["pos_x"] = m_pos.x;
+		GV.lists[S_[0]].I["pos_y"] = m_pos.y;
 	} else if (state == State_PLATFORM_REDACTOR) {
 		if (in.kb.space.just_pressed) {
 			m_start_mouse_pos = in.mouse.pos;

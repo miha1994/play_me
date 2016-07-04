@@ -1,0 +1,20 @@
+fullscreen int 0
+0_0_0 {
+	animation int 0
+	num int 5
+}
+cat {
+	animation int 1
+}
+fly_sq {
+	animation int 0
+	num int 1
+}
+font {
+	animation int 0
+	num int 1
+}
+items {
+	animation int 0
+	num int 1
+}

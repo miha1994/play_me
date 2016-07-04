@@ -54,6 +54,13 @@ void static_im::update (State state, float dt) {
 				m_bg.init (w, h);
 				m_bg.clear (CLR (140,140,140,255));
 				m_bg.draw (&cpy, v2i(0,0));
+
+				cpy = m_fg;
+				m_fg.destroy ();
+				m_fg.init (w, h);
+				m_fg.clear (CLR (0,0,0,0));
+				m_fg.draw (&cpy, v2i(0,0));
+
 				auto cpy4 = cam->m_map_visualisation;
 				cam->m_map_visualisation.destroy ();
 				cam->m_map_visualisation.init (w, h);
@@ -81,6 +88,11 @@ void static_im::update (State state, float dt) {
 					if (sol->m_map << v) {
 						sol->m_map[v] = cpy3[v];
 					}
+				}
+			}
+			if (in.kb['S'].just_pressed) {
+				if (!save_png (m_fg, prefix_path + "tex/" + S_[0] + "/fg.png")) {
+					exit (0);
 				}
 			}
 		}

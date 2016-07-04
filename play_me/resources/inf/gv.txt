@@ -1,0 +1,8 @@
+lev1 {
+	cat_x int 86
+	cat_y int 951
+	h int 1035
+	pos_x int 6
+	pos_y int 792
+	w int 1718
+}

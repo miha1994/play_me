@@ -1,0 +1,30 @@
+{
+	UPDATE_SEQUENCE {
+		camera
+		solid
+		item
+		cat
+		static_im
+	}
+
+	RENDER_SEQUENCE {
+		cat
+		item
+		static_im
+		camera
+		solid
+	}
+
+	DEF {
+		camera {
+		}
+		cat {
+		}
+		static_im {
+		}
+		solid {
+		}
+		item {
+		}
+	}
+}

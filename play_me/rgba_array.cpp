@@ -145,3 +145,40 @@ void rgba_array::draw (rgba_array *src, v2i pos, int scale, v2i max_size, v2i sr
 		}
 	}
 }
+
+void rgba_array::draw_alpha (rgba_array *src, v2i pos, float alpha1) {
+	if (alpha1 > 0.98) {
+		draw (src, pos);
+		return ;
+	}
+	int r_w = Min (m_W, pos.x + src->m_W) - Max (0, pos.x);
+	int r_h = Min (m_H, pos.y + src->m_H) - Max (0, pos.y);
+	v2i start (0,0);
+	if (pos.x < 0) {
+		start.x = -pos.x;
+		pos.x = 0;
+	}
+	if (pos.y < 0) {
+		start.y = -pos.y;
+		pos.y = 0;
+	}
+	if (r_w <= 0 || r_h <= 0) {
+		return;
+	}
+	CLR *s, *d;
+	float d_p, s_p;
+	FOR_2D (v, r_w, r_h) {
+		s = &src->at (start + v);
+		if (!s->a) {
+			continue;
+		}
+		d = &this->at (pos + v);
+		
+		d_p = (1 - ((alpha1 * (s->a)) / 255.0f)) * (d->a / 255.0f);
+		s_p = 1 - d_p;
+		d->r = d_p * d->r + s_p * s->r;
+		d->g = d_p * d->g + s_p * s->g;
+		d->b = d_p * d->b + s_p * s->b;
+		d->a = d->a + ((255-d->a)/255.0) * s->a * alpha1;
+	}
+}

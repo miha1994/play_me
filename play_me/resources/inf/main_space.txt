@@ -1,0 +1,14 @@
+{
+	UPDATE_SEQUENCE {
+		picture_wind
+	}
+
+	RENDER_SEQUENCE {
+		picture_wind
+	}
+
+	DEF {
+		picture_wind {
+		}
+	}
+}

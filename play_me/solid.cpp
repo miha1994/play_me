@@ -8,6 +8,12 @@
 #include "glob_vars.h"
 #include "png.h"
 
+CLR col_table [] = {
+	CLR(0,0,0,0),
+	CLR (255,255,255,170),
+	CLR (255,0,0,170)
+};
+
 void solid::render (State state) {
 	camera *cam = D_PLATFORM (camera);
 	if (state == State_PLATFORM_REDACTOR) {
@@ -30,6 +36,7 @@ void solid::update (State state, float dt) {
 		}
 	} else if (state == State_PLATFORM_REDACTOR) {
 		if (core.m_active_type == Solid) {
+			
 			if (in.mouse.left.just_pressed || in.mouse.right.just_pressed) {
 				m_start_mouse_pos = in.mouse.pos + cam->m_pos;
 			}
@@ -59,23 +66,31 @@ void solid::update (State state, float dt) {
 					swap (v1.y, v2.y);
 				}
 				m_tmp.init (abs.x + (in.mouse.right.pressed_now ? 2 * m_thick : 0), abs.y + (in.mouse.right.pressed_now ? 2 * m_thick : 0));
-				m_tmp.clear (CLR::White);
+				CLR tmp_col = col_table[m_color];
+				tmp_col.a = 255;
+				m_tmp.clear (tmp_col);
 				m_tmp_pos = v1 - (in.mouse.right.pressed_now ? v2i (m_thick,m_thick) : v2i (0,0));
 			}
 			if (in.mouse.left.just_released || in.mouse.right.just_released) {
 				FOR_ARRAY_2D (v, m_tmp) {
 					if (m_map << m_tmp_pos + v) {
-						m_map[m_tmp_pos + v] = in.mouse.left.just_released ? 1 : 0;
+						m_map[m_tmp_pos + v] = in.mouse.left.just_released ? m_color : 0;
 					}
 				}
 				FOR_ARRAY_2D (v, m_map) {
-					m_map_visualisation [v] = m_map[v] ? CLR (255,255,255,120) : CLR(0,0,0,0);
+					m_map_visualisation [v] = col_table[m_map[v]];
 				}
 				m_tmp.destroy ();
 			}
 			if (in.kb.up.just_pressed || in.kb.down.just_pressed) {
 				m_thick += in.kb.up.just_pressed ? 1 : -1;
 				m_thick = Max (m_thick, 0);
+			}
+			if (in.kb['1'].just_pressed) {
+				m_color = 1;
+			}
+			if (in.kb['2'].just_pressed) {
+				m_color = 2;
 			}
 		}
 		if (in.kb.ctrl.pressed_now && in.kb['S'].just_pressed) {
@@ -105,6 +120,7 @@ void solid::clean () {
 }
 
 void solid::load () {
+	m_color = 1;
 	m_draw_in_game_mode = false;
 	m_thick = 2;
 
@@ -140,7 +156,7 @@ void solid::load () {
 	m_map_visualisation.init (w, h);
 	m_map_visualisation.alpha_matters = true;
 	FOR_ARRAY_2D (v, m_map) {
-		m_map_visualisation [v] = m_map[v] ? CLR (255,255,255,120) : CLR(0,0,0,0);
+		m_map_visualisation [v] = col_table[m_map[v]];
 	}
 
 	read_string (); // "}"

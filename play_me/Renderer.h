@@ -23,6 +23,7 @@
 #define D_ADD_SPRITE(_array, _pos)	do {ren.sprite.rgba_ar = &_array; \
 									ren.sprite.pos = _pos; \
 									ren.add_sprite_to_render_list (); } while (0)
+
 // запланировать рендеринг спрайта с указанием масштаба (увеличени€)
 #define D_ADD_SPRITE_SCALE(_array, _pos, _scale)	\
 									do {ren.sprite.rgba_ar = &_array; \
@@ -30,6 +31,14 @@
 									ren.sprite.scale = _scale; \
 									ren.add_sprite_to_render_list (); \
 									ren.sprite.scale = 1; } while (0)
+
+#define D_ADD_SPRITE_ALPHA(_array, _pos, _alpha)	\
+									do {ren.sprite_alpha.rgba_ar = &_array; \
+									ren.sprite_alpha.pos = _pos; \
+									ren.sprite_alpha.alpha1 = _alpha; \
+									ren.m_render_alpha_list.push_back (ren.sprite_alpha); \
+									} while (0)
+
 #define D_ADD_SP_EFFECT_SQUARE(_pos, _radius, _thickness) \
 									do {					\
 									ren.sp_effect_square.pos = _pos;	\
@@ -56,6 +65,11 @@ struct Renderer {
 		v2i pos;
 		int scale;
 	};
+	struct sprite_alpha_info {
+		rgba_array *rgba_ar;
+		v2i pos;
+		float alpha1;
+	};
 	struct sp_effect_square_info {
 		v2i pos;
 		int radius;
@@ -65,6 +79,10 @@ struct Renderer {
 	};
 	list <sprite_info> m_render_list;	// список спрайтов (очередь на редеринг)
 	sprite_info sprite;			// спрайт будет использоватьс€ дл€ добавлени€ его в очередь.  аждое добавление спрайта в очередь заключаетс€ в изменении этого члена и вызова add_sprite_to_render_list ()
+
+	list <sprite_alpha_info> m_render_alpha_list;
+	sprite_alpha_info sprite_alpha;
+
 	Vertex_tex m_screen[4];			// наш экран в виде четырех вершин. Ќужен опенгл при рисовании текстуры
 	list <sp_effect_square_info> m_sp_effect_square;
 	sp_effect_square_info sp_effect_square;

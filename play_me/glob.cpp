@@ -1,7 +1,7 @@
 #include "glob.h"
 
 string prefix_folder = "";
-string prefix_path = "res/";
+string prefix_path = "resources/";
 GLuint gSampler;
 
 CLR operator * (CLR c, float f) {
