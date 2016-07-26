@@ -31,14 +31,7 @@ void frames::init (string file_name) {
 	m_flip_frames.assign (m_frames.size (), rgb);
 	FOR (i, m_frames.size ()) {
 		m_flip_frames[i] = m_frames[i];
-	}
-	forstl (p, m_flip_frames) {
-		rgba_array &a = *p;
-		
-		FOR_2D (v, a.m_W / 2, a.m_H) {
-			swap (a[v], a[v2i (a.m_W - 1 - v.x, v.y)]);
-		}
-		
+		m_flip_frames[i].flip_horizontal ();
 	}
 
 	m_instructions.push_back (command (0, m_frames.size (), 0, 0, 10));

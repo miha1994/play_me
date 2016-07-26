@@ -44,8 +44,17 @@ void static_im::update (State state, float dt) {
 		
 	} else if (state == State_PLATFORM_REDACTOR && core.m_active_type == Static_im) {
 		if (in.kb.ctrl.pressed_now) {
-			if (in.kb['M'].just_pressed) {
-				v2i nsize (in.mouse.pos + cam->m_pos);
+			if (in.kb['M'].just_pressed || in.kb.right.just_released || in.kb.down.just_pressed) {
+				v2i nsize = m_bg.get_WH ();
+				if (in.kb.right.just_released ) {
+					nsize = nsize + v2i (100, 0);
+				}
+				if (in.kb.down.just_released ) {
+					nsize = nsize + v2i (0, 100);
+				}
+				if (in.kb['M'].just_pressed) {
+					nsize = in.mouse.pos + cam->m_pos;
+				}
 				int w = nsize.x, h = nsize.y;
 				GV.lists[S_[0]].I["w"] = w;
 				GV.lists[S_[0]].I["h"] = h;

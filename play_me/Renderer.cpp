@@ -8,10 +8,15 @@ bool g_fullscreen = 0;
 GLfloat colors[D_W*D_H];
 GLuint colors_location;
 
+static bool initiated_black = false;
+
 void Renderer::draw_everything () {
 	static CLR black_ar[D_W * D_H];
-	for each (auto var in black_ar) {
-		var = CLR::Black;
+	if (!initiated_black) {
+		for each (auto var in black_ar) {
+			var = CLR::Black;
+		}
+		initiated_black = true;
 	}
 	memcpy (m_tex_array, black_ar, sizeof (black_ar));
 	forstl (p, m_render_list) {

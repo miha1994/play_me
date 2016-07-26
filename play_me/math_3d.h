@@ -1,6 +1,8 @@
 #ifndef MATH_3D_H
 #define	MATH_3D_H
 
+#define D_ABS(x)	((x) < 0 ? -(x) : (x))
+
 #define v3f Vector3<float> // трехмерный вектор из float
 #define v3i Vector3<int>	// трехмерный вектор из int
 
@@ -129,6 +131,9 @@ struct v2i		// двухмерные вектора
 	bool operator == (const v2i& r) {return x == r.x && y == r.y;}
 	bool operator != (const v2i& r) {return x != r.x || y != r.y;}
 	v2i (const v2f &v);
+	v2i abs () {
+		return v2i (D_ABS (x), D_ABS (y));
+	}
 };
 
 struct v2f		// двухмерные вектора
@@ -160,6 +165,9 @@ struct v2f		// двухмерные вектора
 	v2f (const v2i &v) {
 		x = v.x;
 		y = v.y;
+	}
+	v2f abs () {
+		return v2f (D_ABS (x), D_ABS (y));
 	}
 };
 

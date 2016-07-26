@@ -63,6 +63,13 @@ struct input {
 			}
 		}
 	} kb; // --//-- клавиатура
+	struct _cmd {
+		friend struct input;
+		button_state left;
+		button_state right;
+		button_state jump;
+		button_state fire;
+	} cmd;
 	void upd (); // обновить состояния датчиков
 };
 

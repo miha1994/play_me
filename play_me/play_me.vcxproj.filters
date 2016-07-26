@@ -87,6 +87,18 @@
     <ClCompile Include="particle_system.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="bullet.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="animation.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dark_matter.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ship.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="array_2d.h">
@@ -164,18 +176,30 @@
     <ClInclude Include="particle_system.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="bullet.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="animation.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dark_matter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ship.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="D:\res\inf\copy.txt">
       <Filter>Resource Files</Filter>
     </Text>
-    <Text Include="D:\res\inf\hv.txt">
-      <Filter>Resource Files</Filter>
-    </Text>
     <Text Include="D:\res\inf\gv.txt">
       <Filter>Resource Files</Filter>
     </Text>
-    <Text Include="res\inf\platform_space.txt">
+    <Text Include="resources\inf\platform_space.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="resources\inf\hv.txt">
       <Filter>Resource Files</Filter>
     </Text>
   </ItemGroup>

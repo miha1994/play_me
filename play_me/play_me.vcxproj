@@ -82,9 +82,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="animation.cpp" />
+    <ClCompile Include="bullet.cpp" />
     <ClCompile Include="camera.cpp" />
     <ClCompile Include="cat.cpp" />
     <ClCompile Include="core.cpp" />
+    <ClCompile Include="dark_matter.cpp" />
     <ClCompile Include="direction.cpp" />
     <ClCompile Include="fadma.cpp" />
     <ClCompile Include="frame_buffer.cpp" />
@@ -103,15 +106,19 @@
     <ClCompile Include="read_write.cpp" />
     <ClCompile Include="Renderer.cpp" />
     <ClCompile Include="rgba_array.cpp" />
+    <ClCompile Include="ship.cpp" />
     <ClCompile Include="solid.cpp" />
     <ClCompile Include="space.cpp" />
     <ClCompile Include="static_im.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="animation.h" />
     <ClInclude Include="array_2d.h" />
+    <ClInclude Include="bullet.h" />
     <ClInclude Include="camera.h" />
     <ClInclude Include="cat.h" />
     <ClInclude Include="core.h" />
+    <ClInclude Include="dark_matter.h" />
     <ClInclude Include="direction.h" />
     <ClInclude Include="fadma.h" />
     <ClInclude Include="frame_buffer.h" />
@@ -128,6 +135,7 @@
     <ClInclude Include="pure_opengl.h" />
     <ClInclude Include="read_write.h" />
     <ClInclude Include="Renderer.h" />
+    <ClInclude Include="ship.h" />
     <ClInclude Include="solid.h" />
     <ClInclude Include="space.h" />
     <ClInclude Include="state.h" />
@@ -137,8 +145,8 @@
   <ItemGroup>
     <Text Include="D:\res\inf\copy.txt" />
     <Text Include="D:\res\inf\gv.txt" />
-    <Text Include="D:\res\inf\hv.txt" />
-    <Text Include="res\inf\platform_space.txt" />
+    <Text Include="resources\inf\hv.txt" />
+    <Text Include="resources\inf\platform_space.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

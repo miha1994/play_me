@@ -157,6 +157,7 @@ struct rgba_array : public array_2d <CLR> {
 	void draw (rgba_array *src, v2i pos, int scale, v2i max_size = v2i (0,0)); // отрисовка с масштабом и максимальным размером рендеринга
 	void draw_alpha (rgba_array *src, v2i pos, float alpha1);
 	void draw (rgba_array *src, v2i pos, int scale, v2i max_size, v2i src_start);
+	void flip_horizontal ();
 	rgba_array (bool _alpha_matters = 0) { // конструктор
 		alpha_matters = _alpha_matters;
 	}

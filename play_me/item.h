@@ -26,6 +26,7 @@ struct item : Object {
 	};
 	redactor m_redact;
 	float m_time;
+	void reload ();
 
 	void render (State state);
 	void update (State state, float dt);

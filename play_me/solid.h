@@ -5,6 +5,7 @@
 
 struct solid : Object {
 	array_2d <int> m_map;
+	array_2d <int> m_original_map;
 	v2i m_start_mouse_pos;
 	rgba_array m_tmp;
 	rgba_array m_map_visualisation;

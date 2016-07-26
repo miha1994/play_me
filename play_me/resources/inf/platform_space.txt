@@ -4,12 +4,18 @@
 		solid
 		item
 		cat
+		ship
+		bullet
 		static_im
+		dark_matter
 	}
 
 	RENDER_SEQUENCE {
+		dark_matter
 		cat
+		bullet
 		item
+		ship
 		static_im
 		camera
 		solid
@@ -25,6 +31,14 @@
 		solid {
 		}
 		item {
+		}
+		bullet {
+			cat_bullet
+			blow1
+		}
+		dark_matter {
+		}
+		ship {
 		}
 	}
 }

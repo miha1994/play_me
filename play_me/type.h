@@ -6,5 +6,8 @@ enum Type {
 	Solid,
 	Static_im,
 	Camera,
-	Item
+	Item,
+	Bullet,
+	Dark_matter,
+	Ship
 };

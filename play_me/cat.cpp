@@ -7,8 +7,10 @@
 #include "glob_vars.h"
 #include "hot_vars.h"
 #include "png.h"
+#include "item.h"
+#include "bullet.h"
 
-const float g_time_to_reload_init = 0.2;
+const float g_time_to_reload_init = 0.4;
 #define D_VELOCITY_X_MAX	230
 #define D_VELOCITY_Y_MAX	400
 // проверка на граничение по скорости, нормировка по Х и по Y
@@ -26,11 +28,25 @@ const float g_time_to_reload_init = 0.2;
 #define D_GAME_OVER	m_game_over = true; \
 						m_time_to_reload = g_time_to_reload_init;
 
+void cat::death () {
+	v2f origin (12, 8);
+	v2f centr = m_pos + origin;
+	For (18) {
+		v2f dif (rand1 * 24 - 12, rand1 * 16 - 8);
+		m_fly_effect.add_elem (&m_death_particles[rand ()%2], centr + dif, dif, 0, length (dif) * 1.5, length (dif) *4, 0.2);
+	}
+
+	m_state = Cat_dead;
+	D_GAME_OVER;
+}
+
 void cat::render (State state) {
 	camera *cam = D_PLATFORM (camera);
 	m_fly_effect.render (cam->m_pos);
 	m_frames.m_pos -= cam->m_pos;
-	m_frames.render_frame (!m_to_right ^ (m_state == Cat_slide));
+	if (m_state != Cat_dead) {
+		m_frames.render_frame (!m_to_right ^ (m_state == Cat_slide));
+	}
 	if (m_time_to_reload < g_time_to_reload_init - 0.01) {
 		D_ADD_SPRITE_ALPHA (m_black_screen, v2i(0,0), 1 - m_time_to_reload / g_time_to_reload_init);
 	}
@@ -38,6 +54,7 @@ void cat::render (State state) {
 
 void cat::update (State state, float dt) {
 	camera *cam = D_PLATFORM (camera);
+	bullet *blt = D_PLATFORM (bullet);
 	int y_offset = 0;
 	int x_offset = 0;
 
@@ -48,16 +65,21 @@ void cat::update (State state, float dt) {
 		m_time_to_reload -= dt;
 		if (m_time_to_reload < 0) {
 			m_game_over = false;
+			m_state = Cat_in_jump;
+			//m_frames.go_to_instruction (1);
 			m_pos = m_check_point.pos;
 			cam->m_pos = m_check_point.cam_pos;
 			m_to_right = m_check_point.to_right;
+			m_velocity = v2i(0,0);
+			item * itm = D_PLATFORM (item);
+			itm->reload ();
 		}
 	} else {
 		m_time_to_reload += dt;
 	}
-	if (state == State_PLATFORM_GAME) {
+	if (state == State_PLATFORM_GAME && m_state != Cat_dead) {
 		m_last_jump_btn_pressed += dt;
-		if (in.kb.space.just_pressed) {
+		if (in.cmd.jump.just_pressed) {
 			m_last_jump_btn_pressed = 0;
 		}
 
@@ -73,20 +95,24 @@ void cat::update (State state, float dt) {
 					m_time_to_next_movement = 0.2 + rand1;  
 				}
 			}
-			if (in.kb.dirs[D_RIGHT].just_pressed || in.kb.dirs[D_LEFT].just_pressed) {
+			if (in.cmd.right.just_pressed || in.cmd.left.just_pressed) {
 				m_frames.go_to_instruction (4);
 			}
-			if (in.kb.dirs[D_RIGHT].pressed_now || in.kb.dirs[D_LEFT].pressed_now) {
+			if (in.cmd.right.pressed_now || in.cmd.left.pressed_now) {
 				m_velocity.y = 0;
-				m_velocity.x += (in.kb.dirs[D_RIGHT].pressed_now ? 1 : -1) * 1200 * dt;
+				m_velocity.x += (in.cmd.right.pressed_now ? 1 : -1) * 1200 * dt;
 				D_VEL_X;
-				x_offset = m_velocity.x * dt + (m_velocity.x > 0 ? 1 : -1);
-				m_pos += m_velocity * dt;
 			} else {
 				m_velocity = v2i (0,0);
 			}
-			if (in.kb.dirs[D_RIGHT].just_released || in.kb.dirs[D_LEFT].just_released) {
-				if (!in.kb.dirs[D_RIGHT].pressed_now && !in.kb.dirs[D_LEFT].pressed_now) {
+			if (m_velocity.x || m_ship_vel) {
+				m_velocity.x += m_ship_vel;
+				x_offset = m_velocity.x * dt + (m_velocity.x > 0 ? 1 : -1);
+				m_pos += m_velocity * dt;
+				m_velocity.x -= m_ship_vel;
+			}
+			if (in.cmd.right.just_released || in.cmd.left.just_released) {
+				if (!in.cmd.right.pressed_now && !in.cmd.left.pressed_now) {
 					m_frames.go_to_instruction (1);
 				}
 			}
@@ -98,12 +124,20 @@ void cat::update (State state, float dt) {
 			}
 			break;
 		case Cat_in_jump:
-			if (in.kb.left.pressed_now || in.kb.right.pressed_now) {
-				m_velocity.x += (in.kb.left.pressed_now ? -1 : 1) * 900 * dt;
+			if (in.cmd.fire.just_pressed) {
+				bullet::elem bl;
+				bl.pos = m_pos + v2i (12, 13);
+				bl.active = true;
+				bl.tm_inc = 0;
+				bl.type_num = 0;
+				blt->m_all_bullets.push_back (bl);
+			}
+			if (in.cmd.left.pressed_now || in.cmd.right.pressed_now) {
+				m_velocity.x += (in.cmd.left.pressed_now ? -1 : 1) * 900 * dt;
 			}
 			m_velocity.y += 800 * dt;
 			if ((m_time_velocity -= dt) > 0) {
-				if (in.kb.space.pressed_now) {
+				if (in.cmd.jump.pressed_now) {
 					m_velocity.y = -180;
 				} else {
 					m_time_velocity = -1;
@@ -121,16 +155,24 @@ void cat::update (State state, float dt) {
 			} else {
 				m_frames.m_current_frame = 16;  // кот падает
 			}
-			if (in.kb.space.just_pressed && m_horizontal_fly_able) {
+			if (in.cmd.jump.just_pressed && m_horizontal_fly_able) {
 				m_horizontal_fly_able = false;
 				m_horizontal_fly_time = 0.5;
 				m_state = Cat_horizontal_fly;
 			}
 			break;
 		case Cat_horizontal_fly:
+			if (in.cmd.fire.just_pressed) {
+				bullet::elem bl;
+				bl.pos = m_pos + v2i (12, 13);
+				bl.active = true;
+				bl.tm_inc = 0;
+				bl.type_num = 0;
+				blt->m_all_bullets.push_back (bl);
+			}
 			m_frames.m_current_frame = 17;
-			if (in.kb.left.pressed_now || in.kb.right.pressed_now) {
-				m_velocity.x += (in.kb.left.pressed_now ? -1 : 1) * 900 * dt;
+			if (in.cmd.left.pressed_now || in.cmd.right.pressed_now) {
+				m_velocity.x += (in.cmd.left.pressed_now ? -1 : 1) * 900 * dt;
 			}
 			m_velocity.y = 0;
 			D_VEL_X;
@@ -139,7 +181,7 @@ void cat::update (State state, float dt) {
 			x_offset = m_velocity.x * dt + (m_velocity.x > 0 ? 1 : -1);
 			m_pos += m_velocity * dt;
 			m_horizontal_fly_time -= dt;
-			if (m_horizontal_fly_time < 0 || !in.kb.space.pressed_now) {
+			if (m_horizontal_fly_time < 0 || !in.cmd.jump.pressed_now) {
 				m_state = Cat_in_jump;
 			}
 			if ((m_fly_next_effect_time -= dt) < 0) {
@@ -152,7 +194,7 @@ void cat::update (State state, float dt) {
 			m_frames.m_current_frame = 18;
 			m_velocity.y += 400 * dt;
 			if ((m_time_velocity -= dt) > 0) {
-				if (in.kb.space.pressed_now) {
+				if (in.cmd.jump.pressed_now) {
 					m_velocity.y = -150;
 				} else {
 					m_time_velocity = -1;
@@ -169,16 +211,16 @@ void cat::update (State state, float dt) {
 			m_pos += m_velocity * dt;
 			m_pos.x += x_offset;
 			m_velocity.x = x_offset;
-			if (in.kb.space.just_pressed) {
+			if (in.cmd.jump.just_pressed) {
 				m_pos.x -= x_offset;
-				m_velocity.x = - x_offset * (m_to_right && in.kb.left.pressed_now || !m_to_right && in.kb.right.pressed_now ? D_VELOCITY_X_MAX : 200);
-				m_velocity.y = -290;
+				m_velocity.x = - x_offset * (m_to_right && in.cmd.left.pressed_now || !m_to_right && in.cmd.right.pressed_now ? D_VELOCITY_X_MAX : 200);
+				m_velocity.y = -310;
 				m_state = Cat_in_jump;
 			}
-			if (in.kb.right.pressed_now || in.kb.left.pressed_now) {
+			if (in.cmd.right.pressed_now || in.cmd.left.pressed_now) {
 				m_slide_time -= dt;
 				if (m_slide_time < 0) {
-					if (m_to_right && in.kb.left.pressed_now || !m_to_right && in.kb.right.pressed_now) {
+					if (m_to_right && in.cmd.left.pressed_now || !m_to_right && in.cmd.right.pressed_now) {
 						m_state = Cat_in_jump;
 						m_pos.x -= x_offset;
 					}
@@ -187,6 +229,9 @@ void cat::update (State state, float dt) {
 				m_slide_time = 0.5;
 			}
 			break;
+		case Cat_dead:
+			m_velocity = v2f (0,0);
+			break;
 		}
 		if (m_velocity.x) {  // если кот движется по горизонтали, то апдейт кота
 			m_to_right = m_velocity.x > 0;
@@ -194,6 +239,9 @@ void cat::update (State state, float dt) {
 
 		v2i old = m_frames.m_pos;  // запоминаем старую позицию
 		m_frames.m_pos = m_pos;
+		int mem_sh_v = m_ship_vel;
+		m_velocity.x += mem_sh_v;
+		m_ship_vel = 0;
 		if (D_CONTAINES (D_OBJ ("platform"), "solid")) {
 			solid *sld = (solid *) D_OBJ ("platform")["solid"];
 			bool contin = false;
@@ -203,26 +251,45 @@ void cat::update (State state, float dt) {
 				
 				FOR_2D (vi, 15, y_offset+1) {
 					v2i v (m_frames.m_pos + strt + vi);
-					if (sld->m_map << v && sld->m_map[v] == 1) {
-						m_frames.m_pos.y--;
-						m_pos.y -= 1;
+					if (sld->m_map << v) {
+						if (sld->m_map[v] == 1) {
+							m_frames.m_pos.y--;
+							m_pos.y -= 1;
 						
-						if (m_state != Cat_on_floor) {
-							m_state = Cat_on_floor;
-							if (in.kb.left.pressed_now || in.kb.right.pressed_now) {
-								m_frames.go_to_instruction (5);
-								m_frames.m_current_frame++;
-							} else {
-								m_frames.go_to_instruction (1);
+							if (m_state != Cat_on_floor) {
+								m_state = Cat_on_floor;
+								if (in.cmd.left.pressed_now || in.cmd.right.pressed_now) {
+									m_frames.go_to_instruction (5);
+									m_frames.m_current_frame++;
+								} else {
+									m_frames.go_to_instruction (1);
+								}
 							}
-						}
-						contin = true;
+							contin = true;
 						
-						jump = false;
-						break;
-					}
-					if (sld->m_map << v && sld->m_map[v] == 2) {
-						D_GAME_OVER;
+							jump = false;
+							break;
+						} else if (sld->m_map[v] == 2) {
+							D_GAME_OVER;
+						} else if (sld->m_map[v]) {
+							m_frames.m_pos.y--;
+							m_pos.y -= 1;
+						
+							if (m_state != Cat_on_floor) {
+								m_state = Cat_on_floor;
+								if (in.cmd.left.pressed_now || in.cmd.right.pressed_now) {
+									m_frames.go_to_instruction (5);
+									m_frames.m_current_frame++;
+								} else {
+									m_frames.go_to_instruction (1);
+								}
+							}
+							contin = true;
+						
+							jump = false;
+							m_ship_vel = sld->m_map[v];
+							break;
+						}
 					}
 				}
 			} 
@@ -235,11 +302,12 @@ void cat::update (State state, float dt) {
 					v2i strt (m_velocity.x > 0 ? 20 - x_offset : 2, 3);
 					FOR_2D (vi, Abs(x_offset) + 2, 11) {
 						v2i v (m_frames.m_pos + strt + vi);
-						if (sld->m_map << v && sld->m_map[v] == 1) {
-							cont = true;
-						}
-						if (sld->m_map << v && sld->m_map[v] == 2) {
-							D_GAME_OVER;
+						if (sld->m_map << v) {
+							if (sld->m_map[v] == 1) {
+								cont = true;
+							} else if (sld->m_map[v] == 2) {
+								D_GAME_OVER;
+							}
 						}
 					}
 					if (cont) {
@@ -266,15 +334,23 @@ void cat::update (State state, float dt) {
 				contin = false;
 				FOR_2D (vi, 15, y_offset+1) {
 					v2i v (m_frames.m_pos + strt + vi);
-					if (sld->m_map << v && sld->m_map[v] == 1) {
-						contin = true;
-						m_frames.m_pos.y--;
-						m_pos.y -= 1;
+					if (sld->m_map << v) {
+						if (sld->m_map[v] == 1) {
+							contin = true;
+							m_frames.m_pos.y--;
+							m_pos.y -= 1;
 						
-						break;
-					}
-					if (sld->m_map << v && sld->m_map[v] == 2) {
-						D_GAME_OVER;
+							break;
+						} else if (sld->m_map[v] == 2) {
+							D_GAME_OVER;
+						} else if (sld->m_map[v]) {
+							contin = true;
+							m_frames.m_pos.y--;
+							m_pos.y -= 1;
+							m_ship_vel = sld->m_map[v];
+						
+							break;
+						}
 					}
 				}
 			}
@@ -290,17 +366,19 @@ void cat::update (State state, float dt) {
 				v2i strt (5, y_offset+2);
 				FOR_2D (vi, 15, -y_offset+2) {
 					v2i v (m_frames.m_pos + strt + vi);
-					if (sld->m_map << v && sld->m_map[v] == 1) {
-						m_velocity.y = 0;
-						m_time_velocity = -1;
-						break;
-					}
-					if (sld->m_map << v && sld->m_map[v] == 2) {
-						D_GAME_OVER;
+					if (sld->m_map << v) {
+						if (sld->m_map[v] == 1) {
+							m_velocity.y = 0;
+							m_time_velocity = -1;
+							break;
+						} else if (sld->m_map[v] == 2) {
+							D_GAME_OVER;
+						}
 					}
 				}
 			}
 		}
+		m_velocity.x -= mem_sh_v;
 	} else if (state == State_PLATFORM_REDACTOR) {  // если мы не в игре, в режиме редактирования
 		if (core.m_active_type == Cat) {			// если юзер работает с котом, то кот бегает за его мышкой
 			if (in.mouse.left.pressed_now) {
@@ -325,13 +403,22 @@ void cat::load () { // загрузка/создание кота
 
 	m_game_over = false;
 	m_time_to_reload = 0;
+
 	m_black_screen.init (D_W, D_H);
 	m_black_screen.alpha_matters = true;
 	m_black_screen.clear (CLR(0,0,0,255));
 
+	FOR (i, 2) {
+		m_death_particles[i].init (3 + 2 * i, 3 + 2 * i);
+		m_death_particles[i].alpha_matters = true;
+		m_death_particles[i].clear (CLR (0,0,0, 255));
+	}
+
 	m_time_to_next_movement = 1;  // 1 секунда до след кадра
 	m_frames.init ("cat");
 	m_frames.m_fps = 10;
+
+	m_ship_vel = 0;
 
 	if (D_CONTAINES (GV.lists, S_[0])) {
 		m_pos = m_frames.m_pos = v2i (GV.lists[S_[0]].I["cat_x"], GV.lists[S_[0]].I["cat_y"]);

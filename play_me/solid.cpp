@@ -159,5 +159,7 @@ void solid::load () {
 		m_map_visualisation [v] = col_table[m_map[v]];
 	}
 
+	m_original_map = m_map;
+
 	read_string (); // "}"
 }

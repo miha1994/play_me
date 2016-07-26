@@ -48,11 +48,16 @@ void input::upd () {
 	kb.alt._upd (kb_::isKeyPressed (kb_::LAlt) || kb_::isKeyPressed (kb_::RAlt));
 	kb.shift._upd (kb_::isKeyPressed (kb_::LShift) || kb_::isKeyPressed (kb_::RShift));
 	kb.escape._upd (kb_::isKeyPressed (kb_::Escape));
-	kb.space._upd (kb_::isKeyPressed (kb_::Space) || sf::Joystick::isButtonPressed(0, 0));
+	kb.space._upd (kb_::isKeyPressed (kb_::Space));
 	kb.delete_._upd (kb_::isKeyPressed (kb_::Delete));
 	float x = sf::Joystick::getAxisPosition(0, sf::Joystick::X);
-	kb.dirs[D_RIGHT]._upd (kb_::isKeyPressed (kb_::Right) || x > 30);
-	kb.dirs[D_LEFT]._upd (kb_::isKeyPressed (kb_::Left) || x < -30);
+	kb.dirs[D_RIGHT]._upd (kb_::isKeyPressed (kb_::Right));
+	kb.dirs[D_LEFT]._upd (kb_::isKeyPressed (kb_::Left));
 	kb.dirs[D_UP]._upd (kb_::isKeyPressed (kb_::Up));
 	kb.dirs[D_DOWN]._upd (kb_::isKeyPressed (kb_::Down));
+
+	cmd.right._upd (kb.right.pressed_now || x > 30);
+	cmd.left._upd (kb.left.pressed_now || x < -30);
+	cmd.jump._upd (kb.space.pressed_now || sf::Joystick::isButtonPressed(0, 0));
+	cmd.fire._upd (kb['Z'].pressed_now || sf::Joystick::isButtonPressed(0, 2));
 }

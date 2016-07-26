@@ -1,8 +1,9 @@
 %string
-"fly_sq"
+"ship"
+#"new"
 #"font"
 #"items"
-#"0_0_0"
+"0_0_0"
 "cat"
 
 %int

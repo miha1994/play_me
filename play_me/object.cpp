@@ -5,6 +5,9 @@
 #include "static_im.h"
 #include "camera.h"
 #include "item.h"
+#include "bullet.h"
+#include "dark_matter.h"
+#include "ship.h"
 
 // фабрика объектов
 Object *new_Object (string id) {
@@ -32,6 +35,21 @@ Object *new_Object (string id) {
 	CASE ("item") {
 		item *o = new item;
 		o->m_type = Type::Item;
+		return o;
+	}
+	CASE ("bullet") {
+		bullet *o = new bullet;
+		o->m_type = Type::Bullet;
+		return o;
+	}
+	CASE ("dark_matter") {
+		dark_matter *o = new dark_matter;
+		o->m_type = Type::Dark_matter;
+		return o;
+	}
+	CASE ("ship") {
+		ship *o = new ship;
+		o->m_type = Type::Ship;
 		return o;
 	}
 	DEFAULT {

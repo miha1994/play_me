@@ -182,3 +182,9 @@ void rgba_array::draw_alpha (rgba_array *src, v2i pos, float alpha1) {
 		d->a = d->a + ((255-d->a)/255.0) * s->a * alpha1;
 	}
 }
+
+void rgba_array::flip_horizontal () {
+	FOR_2D (v, m_W / 2, m_H) {
+		swap (this->at (v), this->at(v2i (m_W - 1 - v.x, v.y)));
+	}
+}
